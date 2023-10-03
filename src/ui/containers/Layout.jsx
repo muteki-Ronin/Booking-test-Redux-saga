@@ -4,7 +4,12 @@ import { Outlet } from 'react-router-dom';
 import { Header } from '../components/Header/Header';
 import { Footer } from '../components/Footer/Footer';
 // MUI
-import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
+import {
+  CssBaseline,
+  createTheme,
+  ThemeProvider,
+  Container,
+} from '@mui/material';
 import { orange } from '@mui/material/colors';
 
 const theme = createTheme({
@@ -21,7 +26,9 @@ export const Layout = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
         <Footer />
       </ThemeProvider>
     </>

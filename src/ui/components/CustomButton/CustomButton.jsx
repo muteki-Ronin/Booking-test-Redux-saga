@@ -1,14 +1,14 @@
 // CORE
 import PropTypes from 'prop-types';
 // MUI
-import { Button } from '@mui/material';
+import { Button as ButtonMUI } from '@mui/material';
 // PARTS
 import { LinkWrapper } from './components';
 
 export const CustomButton = (props) => {
   const { disabled, type, children, sx, color, to } = props;
   return (
-    <Button
+    <ButtonMUI
       disabled={disabled}
       variant="contained"
       type={type}
@@ -16,12 +16,12 @@ export const CustomButton = (props) => {
     >
       {to ? (
         <LinkWrapper to={to} style={{ color }}>
-          {children}
+          children
         </LinkWrapper>
       ) : (
-        { children }
+        children
       )}
-    </Button>
+    </ButtonMUI>
   );
 };
 
