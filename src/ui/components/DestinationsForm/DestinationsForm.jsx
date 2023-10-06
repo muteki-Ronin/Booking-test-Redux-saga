@@ -1,4 +1,6 @@
 // CORE
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 // PARTS
 import { TextField } from '../_Form/TextField/TextField';
@@ -7,11 +9,21 @@ import { DatePicker } from '../_Form/DatePicker/DatePicker';
 import { CustomButton } from '../CustomButton/CustomButton';
 // MUI
 import { Box, Grid } from '@mui/material';
+// SELECTORS
+import { selectDestinationLoading } from '../../../engine/core/destination/selectors';
+//  ACTIONS
+import { getDestinationsAsync } from '../../../engine/init/saga/asyncActions';
 
 export const DestinationsForm = () => {
+  const dispatch = useDispatch();
+  const loader = useSelector(selectDestinationLoading);
   const onSubmit = (value) => console.log(value);
   // const newDate = new Date();
   // console.log(newDate);
+
+  useEffect(() => {
+    dispatch(getDestinationsAsync());
+  }, [dispatch]);
 
   return (
     <Form
@@ -23,6 +35,7 @@ export const DestinationsForm = () => {
               <Field
                 name="destinations"
                 label="Destinations"
+                disabled={loader}
                 component={Select}
                 options={[{ label: 'test', value: 'test' }]}
               />
@@ -32,6 +45,7 @@ export const DestinationsForm = () => {
               <Field
                 name="check_in"
                 label="Check in"
+                disabled={loader}
                 component={DatePicker}
                 // minDate={newDate}
               />
@@ -55,7 +69,11 @@ export const DestinationsForm = () => {
             </Grid>
 
             <Grid item xs={1}>
-              <CustomButton type="submit" sx={{ height: '55px' }}>
+              <CustomButton
+                type="submit"
+                sx={{ height: '55px' }}
+                disabled={loader}
+              >
                 Submit
               </CustomButton>
             </Grid>
