@@ -63,8 +63,8 @@ export const DestinationsForm = () => {
               <Field
                 name="check_out"
                 label="Check out"
+                disabled={destinationLoader}
                 component={DatePicker}
-                mi
                 // minDate={new Date()}
               />
             </Grid>
