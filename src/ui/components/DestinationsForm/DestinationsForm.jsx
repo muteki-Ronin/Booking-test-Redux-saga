@@ -10,16 +10,24 @@ import { CustomButton } from '../CustomButton/CustomButton';
 // MUI
 import { Box, Grid } from '@mui/material';
 // SELECTORS
-import { selectDestinationLoading } from '../../../engine/core/destination/selectors';
+import {
+  selectDestinationItems,
+  selectDestinationLoading,
+} from '../../../engine/core/destination/selectors';
+import { selectHotelsLoading } from '../../../engine/core/hotels/selectors';
 //  ACTIONS
-import { getDestinationsAsync } from '../../../engine/init/saga/asyncActions';
+import { getDestinationsAsync } from '../../../engine/core/destination/saga/asyncActions';
+import { getHotelsAsync } from '../../../engine/core/hotels/saga/asyncActions';
 
 export const DestinationsForm = () => {
   const dispatch = useDispatch();
-  const loader = useSelector(selectDestinationLoading);
-  const onSubmit = (value) => console.log(value);
-  // const newDate = new Date();
-  // console.log(newDate);
+  const destinationLoader = useSelector(selectDestinationLoading);
+  const destinationItems = useSelector(selectDestinationItems);
+  const hotelsLoader = useSelector(selectHotelsLoading);
+
+  const onSubmit = (value) => {
+    dispatch(getHotelsAsync(value));
+  };
 
   useEffect(() => {
     dispatch(getDestinationsAsync());
@@ -35,9 +43,9 @@ export const DestinationsForm = () => {
               <Field
                 name="destinations"
                 label="Destinations"
-                disabled={loader}
+                disabled={destinationLoader}
                 component={Select}
-                options={[{ label: 'test', value: 'test' }]}
+                options={destinationItems}
               />
             </Grid>
 
@@ -45,9 +53,9 @@ export const DestinationsForm = () => {
               <Field
                 name="check_in"
                 label="Check in"
-                disabled={loader}
+                disabled={destinationLoader}
                 component={DatePicker}
-                // minDate={newDate}
+                // minDate={new Date()}
               />
             </Grid>
 
@@ -56,6 +64,7 @@ export const DestinationsForm = () => {
                 name="check_out"
                 label="Check out"
                 component={DatePicker}
+                mi
                 // minDate={new Date()}
               />
             </Grid>
@@ -72,7 +81,7 @@ export const DestinationsForm = () => {
               <CustomButton
                 type="submit"
                 sx={{ height: '55px' }}
-                disabled={loader}
+                disabled={destinationLoader || hotelsLoader}
               >
                 Submit
               </CustomButton>

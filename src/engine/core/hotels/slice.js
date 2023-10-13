@@ -19,6 +19,6 @@ const hotels = createSlice({
   },
 });
 
-export const { setItems, setLoading } = hotels.action;
+export const { setItems, setLoading } = hotels.actions;
 
-export default hotels.reducer;
+export default hotels.reducer; 

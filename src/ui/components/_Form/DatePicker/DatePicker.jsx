@@ -11,7 +11,7 @@ export const DatePicker = (props) => {
     input: { onChange, value },
     label,
     disabled,
-    minDate,
+    // minDate,
   } = props;
 
   return (
@@ -20,9 +20,9 @@ export const DatePicker = (props) => {
         label={label}
         inputFormat="MM/DD/YYYY"
         value={value || null}
-        minDate={minDate}
+        // minDate={minDate}
         onChange={onChange}
-        renderInput={(param) => <TextField {...param} />}
+        TextField={(params) => <TextField {...params} />}
         disabled={disabled}
       />
     </LocalizationProvider>

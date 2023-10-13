@@ -1,8 +1,12 @@
 // CORE
 import { all, call } from 'redux-saga/effects';
 // WATCHERS
-import { destinationsWatcher } from './saga/watcher';
+import { destinationsWatcher } from '../core/destination/saga/watcher';
+import { hotelsWatcher } from '../core/hotels/saga/watcher';
 
 export function* rootSaga() {
-  yield all([call(destinationsWatcher)]);
+  yield all([
+    call(destinationsWatcher), 
+    call(hotelsWatcher)
+  ]);
 }

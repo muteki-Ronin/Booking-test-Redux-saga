@@ -1,4 +1,4 @@
-// CORE
+// MUI
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -9,11 +9,17 @@ export const Select = (props) => {
     options,
     label,
     input: { onChange, value },
+    disabled,
   } = props;
   return (
     <FormControl fullWidth>
       <InputLabel>{label}</InputLabel>
-      <SelectMUI value={value} label={label} onChange={onChange}>
+      <SelectMUI
+        value={value}
+        label={label}
+        onChange={onChange}
+        disabled={disabled}
+      >
         {options.map((option) => (
           <MenuItem value={option.value} key={option.value}>
             {option.label}

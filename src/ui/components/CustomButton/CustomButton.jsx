@@ -16,7 +16,7 @@ export const CustomButton = (props) => {
     >
       {to ? (
         <LinkWrapper to={to} style={{ color }}>
-          children
+          {children}
         </LinkWrapper>
       ) : (
         children
